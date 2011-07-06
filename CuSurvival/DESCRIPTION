@@ -1,0 +1,14 @@
+Package: CuSurvival
+Version: 1.0.0
+Date: 2010-08-04
+Title: SMI Northern Fur Seal Survival Analysis
+Author: Jeff Laake <jeff.laake@noaa.gov>
+Description: This package provides code that uses RMark
+             to analyze resight data of branded sea lions for
+             survival estimation.
+Depends: R (>= 2.12.0)
+LazyLoad: yes
+License: GPL version 2 or later
+Maintainer: Jeff Laake <Jeff.Laake@noaa.gov>
+Depends: RMark
+
