@@ -1,7 +1,8 @@
 extract.Cu <-
-function(file="cutagnew.mdb",dir="C:/Users/Jeff Laake/Workspace/CuSurvival",begin=615,end=831)
+function(file="cutagnew.mdb",dir="",begin=615,end=831)
 {
 # Attach database and fetch the tag and resight tables
+	if(dir=="")dir=system.file(package="CIPinnipedAnalysis")
 	xx=require(RODBC,quietly=TRUE)
  	fdir=file.path(dir,file)
 	connection=odbcConnectAccess(fdir)
