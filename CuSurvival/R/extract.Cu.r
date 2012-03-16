@@ -28,7 +28,7 @@
 #' 
 #' @author Jeff Laake
 #' @examples 
-#' zcdata=extract.Zc()
+#' cudata=extract.Cu()
 extract.Cu <-
 function(file="cutagnew.mdb",dir="",begin=615,end=831)
 {

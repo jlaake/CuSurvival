@@ -35,13 +35,13 @@ process.Cu.cjs <-function(cudata,model="cjs")
 #   Add age bins for Phi and p and set intercept levels
 	cu.ddl$Phi$ageS=cut(cu.ddl$Phi$Age,c(0,3,6,9,12,15,36),right=FALSE)
 	levels(cu.ddl$Phi$ageS)=c("0-2","3-5","6-8","9-11","12-14","15+")
-	cu.ddl$Phi$ageS=relevel(cu.ddl$Phi$ageS,ref="5to7")
+	cu.ddl$Phi$ageS=relevel(cu.ddl$Phi$ageS,ref="6-8")
 	cu.ddl$p$agep=cut(cu.ddl$p$Age,c(1,3,6,9,37),right=FALSE)
-	levels(cu.ddl$p$agep)=c("1to2","3to5","6to8","9plus")
-	cu.ddl$p$agep=relevel(cu.ddl$p$agep,ref="6to8")
+	levels(cu.ddl$p$agep)=c("1-2","3-5","6-8","9plus")
+	cu.ddl$p$agep=relevel(cu.ddl$p$agep,ref="6-8")
 #   Create age covariates for Phi and p
 	cu.ddl$Phi$young=0
-	cu.ddl$Phi$young[cu.ddl$Phi$Age<3&cu.ddl$Phi$time!=1975]=1
+	cu.ddl$Phi$young[cu.ddl$Phi$Age<3&cu.ddl$Phi$time!=1994]=1
 	cu.ddl$p$twoplus = 0
 	cu.ddl$p$twoplus[cu.ddl$p$Age>=2]= 1
 #   Return list containing processed data list and design data list
