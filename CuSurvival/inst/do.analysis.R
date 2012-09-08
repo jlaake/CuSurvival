@@ -101,9 +101,6 @@ define.models=function(cudata.proc)
 library(marked)
 # extract data using code in package
 cudata=extract.Cu()
-# create 1975 time dependent variables even though these are not used to avoid code error
-cudata$td1975=0
-cudata$repro1975=0
 # create processed data and design data list
 cu.list=process.Cu.cjs(cudata)
 # create function with set of models that you want to consider

@@ -6,11 +6,13 @@ Author: Jeff Laake <jeff.laake@noaa.gov>
 Description: This package provides code that extracts data so they can be used
     with RMark or marked to analyze resight data of branded sea lions for
     survival estimation.
+Depends:
+    CalcurData
 Suggests:
     RMark,
     marked
 LazyLoad: yes
-License: GPL version 2 or later
+License: GPL(>=2)
 Maintainer: Jeff Laake <Jeff.Laake@noaa.gov>
 Collate:
     'extract.Cu.r'

@@ -5,13 +5,11 @@ Extracts data from ACCESS databaseand constructs the relevant capture histories 
 tagging(Cutags) and resighting (Cutag Live Resights) tables. It constructs all the
 queries that used to be done in ACCESS.}
 \usage{
-  extract.Cu(file = "cutagnew.mdb", dir = "", begin = 615,
-    end = 831)
+  extract.Cu(dir = NULL, begin = 615, end = 831)
 }
 \arguments{
-  \item{file}{ACCESS database filename}
-
-  \item{dir}{Directory containing ACCESS database}
+  \item{dir}{Directory containing Cu database; NULL uses
+  default location}
 
   \item{begin}{month-day at beginning of resight period
   (515 = May 15)}
@@ -42,7 +40,7 @@ queries that used to be done in ACCESS.}
   and \code{end} inclusive of those dates.
 }
 \examples{
-zcdata=extract.Zc()
+cudata=extract.Cu()
 }
 \author{
   Jeff Laake

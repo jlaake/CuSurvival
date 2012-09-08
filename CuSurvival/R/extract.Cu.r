@@ -9,10 +9,9 @@
 #' weight. Also, excludes any not tagged in the fall or any from Castle Rock.  Restricts resightings to
 #' those seen between \code{begin} and \code{end} inclusive of those dates.
 #'
-#' @import RODBC 
+#' @import CalcurData 
 #' @export
-#' @param file ACCESS database filename
-#' @param dir Directory containing ACCESS database
+#' @param dir Directory containing Cu database; NULL uses default location
 #' @param begin month-day at beginning of resight period (515 = May 15)
 #' @param end month-day at end of resight period (831 = August 31)
 #' @return dataframe containing following fields \item{ch}{capture history;
@@ -29,22 +28,17 @@
 #' @author Jeff Laake
 #' @examples 
 #' cudata=extract.Cu()
-extract.Cu <-
-function(file="cutagnew.mdb",dir="",begin=615,end=831)
+extract.Cu=function(dir=NULL,begin=615,end=831)
 {
 # Attach database and fetch the tag and resight tables
-	if(dir=="")dir=system.file(package="CIPinnipedAnalysis")
-	xx=require(RODBC,quietly=TRUE)
- 	fdir=file.path(dir,file)
-	connection=odbcConnectAccess(fdir)
-	Alive=sqlFetch(connection,"Cutag Live Resights")
+	Alive=getCalcurData("Cu","Cutag Live Resights",dir=dir)
 	Alive$pupyear=as.numeric(as.POSIXlt(Alive$sitedate)$year)+1900		
-	Tagged=sqlFetch(connection,"Cutags")
+	Tagged=getCalcurData("Cu","Cutags",dir=dir)
 	Tagged$ID=as.character(Tagged$ID)
 	Alive$ID=as.character(Alive$ID)
 	mon=as.POSIXlt(Tagged$sitedate)$mon+1
 # remove duplicates across years -- there shouldn't be any	
-	Dups=sqlFetch(connection,"DuplicateTags0708")
+	Dups=getCalcurData("Cu","DuplicateTags0708",dir=dir)
 	Tagged=merge(Tagged,subset(Dups,select=c("ID","cohort")),by="ID",all.x=TRUE)
 	Tagged=subset(Tagged,subset=is.na(cohort.y))
 	Tagged$cohort.y=NULL
@@ -115,6 +109,8 @@ function(file="cutagnew.mdb",dir="",begin=615,end=831)
 	MarkData$tagtype[MarkData$tagtype=="SML2" & MarkData$numtags==1]="SML1"
 	MarkData$tagtype=factor(MarkData$tagtype)
 	MarkData$tagtype=relevel(MarkData$tagtype,ref="PRT2")
+	MarkData$td1975=0
+	MarkData$repro1975=0
 	return(MarkData)
 }
 
